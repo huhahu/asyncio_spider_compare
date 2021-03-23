@@ -89,6 +89,7 @@ class SpiderThreads(SpiderSync):
 class SpiderFactory:
     output = ""
     reg = ""
+    url = []
     
     def get_spider_threads(self):
         return SpiderThreads(self.output, self.reg)
@@ -101,29 +102,30 @@ class SpiderFactory:
 
 
 class DemoSpider(SpiderFactory):
-    output = r'D:\temp\spider'
-    reg = r'<img src="(http:\/\/www\.ikmt\.net.*?\.jpg)"'
-
-
-if __name__ == "__main__":
-    _spider_targets = [
+    
+    spider_urls = [
         "http://www.ikmt.net/mntp/xgmn",
         "http://www.ikmt.net/mntp/qcmn",
         "http://www.ikmt.net/mntp/mnxh",
         "http://www.ikmt.net/mntp/xgcm"
     ]
+    output = r'D:\temp\spider'
+    reg = r'<img src="(http:\/\/www\.ikmt\.net.*?\.jpg)"' 
+
+if __name__ == "__main__":
 
     start_tm = time.time()
     
     spider = DemoSpider()
+    spider_urls = spider.spider_urls
 
     # # sync
-    # spider.get_spider_sync().run(_spider_targets)
+    # spider.get_spider_sync().run(spider_urls)
 
     # threads
-    spider.get_spider_threads().run(_spider_targets)
+    spider.get_spider_threads().run(spider_urls)
 
     # # asyncio
-    # asyncio.run(spider.get_spider_asyncio().run(_spider_targets))
+    # asyncio.run(spider.get_spider_asyncio().run(spider_urls))
 
     print("================cost time is:", (time.time() - start_tm))
