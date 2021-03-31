@@ -20,7 +20,7 @@ class BaseIO:
         return response
 
     async def _get_async(self, url):
-        async with aiohttp.ClientSession() as session: 
+        async with aiohttp.ClientSession() as session:
             response = await session.get(url)
             content = await response.read()
         return content
@@ -132,4 +132,5 @@ if __name__ == "__main__":
     # # asyncio
     # asyncio.run(spider.get_spider_asyncio().run(spider_urls))
 
+    print("I am rebase")
     print("================cost time is:", (time.time() - start_tm))
