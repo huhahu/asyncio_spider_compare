@@ -20,7 +20,7 @@ class BaseIO:
         return response
 
     async def _get_async(self, url):
-        async with aiohttp.ClientSession() as session:
+        async with aiohttp.ClientSession() as session: 
             response = await session.get(url)
             content = await response.read()
         return content
